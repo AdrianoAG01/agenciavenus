@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vênus — Agência de Criadoras</title>
+<link rel="icon" type="image/png" href="img/favicon-venus.png">
+<meta name="description" content="Vênus. Agência de gestão de carreira para criadoras de conteúdo sensível. Imagem, produção, tráfego, atendimento e retaguarda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:wdth,wght@75..125,400..700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   TOKENS
+   =========================================================== */
+:root{
+  /* marca */
+  --lilas:#b57edc;
+  --lilas-claro:#dbb6ee;
+  --lilas-escuro:#7f4ca5;
+  --rosa:#ff69b4;
+
+  /* neutros */
+  --preto:#000000;
+  --carvao:#0c0a10;
+  --grafite:#141018;
+  --osso:#f4f1f6;
+
+  /* tipografia */
+  --display:"Marcellus","Times New Roman",serif;
+  --texto:"Archivo",system-ui,-apple-system,sans-serif;
+
+  /* escala de espaçamento (base 8) */
+  --e1:8px;
+  --e2:16px;
+  --e3:24px;
+  --e4:40px;
+  --e5:clamp(48px,6vw,72px);
+  --e6:clamp(72px,9vh,112px);
+  --secao:clamp(88px,12vh,152px);
+  --gutter:clamp(20px,5vw,88px);
+
+  /* raios */
+  --r-s:10px;
+  --r-m:16px;
+  --r-l:24px;
+  --r-xl:32px;
+
+  /* tema padrão (escuro) */
+  --bg:var(--preto);
+  --fg:#ffffff;
+  --suave:#918c99;
+  --linha:rgba(255,255,255,.12);
+  --superficie:rgba(255,255,255,.035);
+  --superficie-alta:rgba(255,255,255,.07);
+  --acento:var(--lilas-claro);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--preto);color:#fff;
+  font-family:var(--texto);font-weight:400;
+  font-size:clamp(15px,1.05vw,17px);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--lilas);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1300px;margin:0 auto;padding-inline:var(--gutter)}
+
+h1,h2,h3,.display{font-family:var(--display);font-weight:400;margin:0;letter-spacing:.005em}
+h2{font-size:clamp(1.9rem,4vw,3.4rem);line-height:1.08}
+h3{font-size:clamp(1.15rem,1.5vw,1.45rem);line-height:1.22}
+p{margin:0}
+.medida{max-width:54ch}
+
+/* ===========================================================
+   TEMAS DE SEÇÃO — fundos neutros, cor só no pico
+   =========================================================== */
+section{background:var(--bg);color:var(--fg);position:relative}
+.t-preto  {--bg:var(--preto);--fg:#fff;--suave:#bdb7c7;--linha:rgba(255,255,255,.16);
+           --superficie:rgba(255,255,255,.035);--superficie-alta:rgba(255,255,255,.07);--acento:var(--lilas-claro)}
+.t-carvao {--bg:var(--carvao);--fg:#fff;--suave:#c0b9ca;--linha:rgba(255,255,255,.14);
+           --superficie:rgba(255,255,255,.04);--superficie-alta:rgba(181,126,220,.12);--acento:var(--lilas-claro)}
+.t-osso   {--bg:var(--osso);--fg:#151019;--suave:#463f4e;--linha:rgba(21,16,25,.16);
+           --superficie:rgba(255,255,255,.7);--superficie-alta:#ffffff;--acento:var(--lilas-escuro)}
+.t-violeta{--bg:#6d3a94;--fg:#fff;--suave:rgba(255,255,255,.88);--linha:rgba(255,255,255,.32);
+           --superficie:rgba(255,255,255,.1);--superficie-alta:rgba(255,255,255,.16);--acento:#fff;  background-image:
+    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(255,105,180,.34), transparent 62%),
+    radial-gradient(ellipse 65% 60% at 92% 96%, rgba(219,182,238,.4), transparent 64%);
+}
+.t-ameixa{--bg:#1a1124;--fg:#fff;--suave:#c3bacd;--linha:rgba(219,182,238,.2);
+          --superficie:rgba(255,255,255,.05);--superficie-alta:rgba(181,126,220,.15);--acento:var(--lilas-claro);
+  background-image:
+    radial-gradient(ellipse 55% 60% at 4% 0%, rgba(127,76,165,.38), transparent 62%),
+    radial-gradient(ellipse 45% 55% at 100% 100%, rgba(255,105,180,.14), transparent 66%);
+}
+.bloco{padding-block:var(--secao)}
+.t-grafite{--bg:#191122;--fg:#fff;--suave:#c2b9cc;--linha:rgba(219,182,238,.22);
+           --superficie:rgba(255,255,255,.05);--superficie-alta:rgba(181,126,220,.14);--acento:var(--lilas-claro);
+  background-image:radial-gradient(ellipse 80% 120% at 50% 0%, rgba(127,76,165,.3), transparent 70%);
+}
+.faixa-numeros{padding-block:var(--e6)}
+.t-magenta{--bg:#8a3c8f;--fg:#fff;--suave:rgba(255,255,255,.9);--linha:rgba(255,255,255,.34);
+           --superficie:rgba(255,255,255,.1);--superficie-alta:rgba(255,255,255,.18);--acento:#fff;
+  background-image:
+    radial-gradient(ellipse 75% 70% at 88% 6%, rgba(255,105,180,.45), transparent 62%),
+    radial-gradient(ellipse 80% 80% at 6% 100%, rgba(127,76,165,.65), transparent 66%);
+}
+
+/* ===========================================================
+   PERGUNTAS FREQUENTES
+   =========================================================== */
+.faq{display:grid;gap:var(--e1);max-width:900px}
+.faq details{
+  background:var(--superficie);border:1px solid var(--linha);border-radius:var(--r-m);
+  transition:background .3s,border-color .3s;
+}
+.faq details[open]{background:var(--superficie-alta);border-color:rgba(219,182,238,.35)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+  gap:var(--e3);padding:var(--e3) var(--e4) var(--e3) var(--e3);
+  font-family:var(--display);font-size:clamp(1rem,1.3vw,1.2rem);line-height:1.3;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";flex:0 0 auto;width:11px;height:11px;
+  border-right:1px solid var(--acento);border-bottom:1px solid var(--acento);
+  transform:rotate(45deg) translateY(-3px);transition:transform .3s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg) translateY(-3px)}
+.faq .resposta{padding:0 var(--e4) var(--e3) var(--e3);color:var(--suave);max-width:68ch}
+
+/* cabeçalho de seção — espaçamento único para todas */
+.cabeca{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:var(--e3) var(--e5);align-items:end;
+}
+.cabeca p{color:var(--suave)}
+.corpo{margin-top:var(--e6)}
+
+/* ===========================================================
+   TOPO
+   =========================================================== */
+.topo{
+  position:fixed;inset:var(--e2) var(--e2) auto;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--e3);
+  padding:14px 18px 14px 24px;border-radius:var(--r-xl);
+  color:#fff;border:1px solid transparent;
+  transition:background .4s,backdrop-filter .4s,border-color .4s;
+}
+.topo.fixa{background:rgba(10,8,14,.72);backdrop-filter:blur(16px);border-color:rgba(255,255,255,.1)}
+.marca{display:inline-flex;align-items:center;line-height:0}
+.marca img{height:26px;width:auto;display:block}
+footer .marca img{height:44px}
+.menu{display:flex;gap:var(--e4);font-size:.82rem;letter-spacing:.04em}
+.menu a{opacity:.78;transition:opacity .25s}
+.menu a:hover{opacity:1}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 24px;border:1px solid currentColor;border-radius:999px;
+  font-size:.84rem;font-weight:500;letter-spacing:.06em;color:var(--acento);
+  background:transparent;cursor:pointer;font-family:var(--texto);white-space:nowrap;
+  transition:background .3s,color .3s,border-color .3s,transform .3s;
+}
+.btn:hover{background:var(--acento);color:var(--bg);transform:translateY(-1px)}
+.btn-cheio{background:var(--acento);color:var(--bg)}
+.btn-cheio:hover{filter:brightness(1.1)}
+.btn-grande{padding:16px 34px;font-size:.9rem}
+.topo .btn{color:#fff;border-color:rgba(255,255,255,.4)}
+.topo .btn:hover{background:#fff;color:#000;border-color:#fff}
+
+/* ===========================================================
+   HERO
+   =========================================================== */
+.hero{
+  min-height:100svh;display:flex;align-items:center;
+  padding:clamp(175px,23vh,250px) 0 clamp(110px,15vh,170px);overflow:hidden;
+}
+.hero .aurora{
+  position:absolute;z-index:0;pointer-events:none;
+  width:min(920px,130vw);aspect-ratio:1;right:-14%;top:-18%;
+  background:radial-gradient(circle,rgba(127,76,165,.5) 0%,rgba(127,76,165,.14) 42%,transparent 70%);
+  filter:blur(20px);
+}
+.hero .aurora.b{right:auto;left:-18%;top:auto;bottom:-26%;width:min(720px,110vw);
+  background:radial-gradient(circle,rgba(255,105,180,.18) 0%,transparent 68%)}
+.hero .wrap{position:relative;z-index:2;display:grid;gap:clamp(48px,9vh,110px);width:100%}
+.hero h1{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(1.7rem,4.1vw,3.8rem);line-height:1.4;letter-spacing:.1em;
+  max-width:24ch;
+}
+.hero-base{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--e5);align-items:end}
+.hero-base p{color:var(--suave);max-width:48ch;font-size:1.05rem}
+.hero-acoes{margin-top:var(--e4)}
+.hero h1 .cromo{
+  background:linear-gradient(180deg,#fff 0%,#dbb6ee 42%,#b57edc 60%,#fff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;
+}
+.abre{opacity:0;transform:translateY(18px);animation:entrar 1s cubic-bezier(.2,.7,.2,1) forwards}
+.abre.d1{animation-delay:.12s}.abre.d2{animation-delay:.26s}.abre.d3{animation-delay:.4s}
+@keyframes entrar{to{opacity:1;transform:none}}
+.hero-meta{display:grid;gap:6px;font-size:.8rem;font-weight:500;letter-spacing:.12em;color:var(--suave)}
+.rolar{position:absolute;left:var(--gutter);bottom:var(--e4);z-index:2;
+  font-size:.72rem;letter-spacing:.18em;color:var(--suave)}
+
+/* ===========================================================
+   DIVISÃO DO TRABALHO
+   =========================================================== */
+.divisao{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr);gap:var(--e5);align-items:start}
+.divisao .coluna-titulo{position:sticky;top:120px}
+.divisao .coluna-titulo p{color:var(--suave);margin-top:var(--e3);max-width:36ch}
+.placar{font-family:var(--display);font-size:clamp(3.2rem,8vw,6.6rem);line-height:.9;
+  display:flex;align-items:baseline;gap:12px;margin-bottom:var(--e2)}
+.placar .barra{font-size:.45em;color:var(--acento)}
+
+.grupo + .grupo{margin-top:var(--e5)}
+.grupo-topo{display:flex;align-items:baseline;justify-content:space-between;gap:var(--e2);
+  padding-bottom:var(--e2);margin-bottom:var(--e2);border-bottom:1px solid var(--linha)}
+.grupo-topo .quem{font-family:var(--display);font-size:clamp(1.05rem,1.5vw,1.35rem)}
+.grupo-topo .conta{font-size:.74rem;font-weight:500;letter-spacing:.14em;color:var(--suave)}
+
+.blocos{display:grid;gap:var(--e1)}
+.blocos.suas{grid-template-columns:repeat(3,1fr);gap:var(--e2)}
+.blocos.nossas{grid-template-columns:repeat(4,1fr)}
+.bloco-item{border:1px solid var(--linha);display:flex;flex-direction:column;justify-content:space-between}
+.bloco-item .rot{font-size:.66rem;font-weight:500;letter-spacing:.14em;opacity:.75}
+.bloco-item .nome{font-family:var(--display);line-height:1.16}
+
+.suas .bloco-item{
+  background:var(--superficie-alta);border-color:rgba(219,182,238,.3);
+  border-radius:var(--r-l);padding:var(--e3);gap:var(--e4);
+  min-height:clamp(160px,17vw,210px);
+}
+.suas .nome{font-size:clamp(1.1rem,1.8vw,1.5rem)}
+.suas .apoio{display:block;margin-top:var(--e1);font-family:var(--texto);font-size:.85rem;
+  line-height:1.5;color:var(--suave)}
+.nossas .bloco-item{
+  background:var(--superficie);border-radius:var(--r-s);padding:14px 16px;gap:var(--e2);
+  min-height:clamp(78px,8vw,100px);
+  transition:background .3s,border-color .3s;
+}
+.nossas .bloco-item:hover{background:var(--superficie-alta);border-color:rgba(219,182,238,.4)}
+.nossas .nome{font-size:clamp(.86rem,1.02vw,1rem)}
+
+/* ===========================================================
+   MANIFESTO
+   =========================================================== */
+.manifesto-grade{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--e5);align-items:start}
+.manifesto{font-size:clamp(1.6rem,3.2vw,2.9rem);line-height:1.24;max-width:20ch;font-family:var(--display)}
+.manifesto span{color:var(--suave)}
+.manifesto-texto{display:grid;gap:var(--e3);color:var(--suave);max-width:50ch;padding-top:var(--e1)}
+.manifesto-texto strong{color:var(--fg);font-weight:400}
+
+/* ===========================================================
+   SERVIÇOS
+   =========================================================== */
+.servicos{display:grid;gap:var(--e1)}
+.servico{
+  display:grid;grid-template-columns:clamp(140px,16vw,220px) minmax(0,1fr);
+  gap:var(--e3) var(--e5);align-items:baseline;
+  padding:var(--e4) var(--e3);border-radius:var(--r-m);
+  border:1px solid transparent;transition:background .3s,border-color .3s;
+}
+.servico:hover{background:var(--superficie);border-color:var(--linha)}
+.servico p{color:var(--suave);max-width:58ch}
+
+/* ===========================================================
+   MÉTODO
+   =========================================================== */
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--e2)}
+.passo{
+  background:var(--superficie);border:1px solid var(--linha);border-radius:var(--r-m);
+  padding:var(--e4) var(--e3);display:grid;gap:var(--e2);align-content:start;
+}
+.passo .etapa{font-size:.74rem;font-weight:600;letter-spacing:.16em;color:var(--acento)}
+.passo p{color:var(--suave);font-size:.94rem}
+
+/* ===========================================================
+   CRITÉRIOS
+   =========================================================== */
+.criterios-grade{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--e5);align-items:start}
+.criterio{display:grid;gap:var(--e1);padding:var(--e3) 0;border-top:1px solid var(--linha)}
+.criterio:first-of-type{border-top:0;padding-top:0}
+.criterio p{color:var(--suave);max-width:48ch}
+.selo{
+  background:var(--superficie-alta);border:1px solid var(--linha);border-radius:var(--r-l);
+  padding:var(--e5) var(--e4);
+}
+.selo .display{font-size:clamp(1.3rem,2vw,1.8rem);line-height:1.26}
+.selo p{color:var(--suave);margin-top:var(--e2)}
+.selo .btn{margin-top:var(--e4)}
+
+/* ===========================================================
+   NÚMEROS / ELENCO
+   =========================================================== */
+.numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--e2)}
+.numero{
+  background:var(--superficie);border:1px solid var(--linha);border-radius:var(--r-m);
+  padding:var(--e4) var(--e3);text-align:left;
+}
+.numero .valor{font-family:var(--display);font-size:clamp(2.1rem,4.4vw,3.6rem);line-height:1;color:var(--fg)}
+.numero .rotulo{display:block;margin-top:var(--e2);font-size:.8rem;font-weight:500;letter-spacing:.1em;color:var(--suave)}
+
+.elenco{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--e2)}
+.ficha{
+  position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r-l);
+  background:linear-gradient(155deg,#1d1526,#100b17 58%,#07050b);
+  border:1px solid var(--linha);display:flex;flex-direction:column;justify-content:flex-end;
+  padding:var(--e3);isolation:isolate;color:#fff;
+}
+.ficha .retrato-ficha{
+  position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.96) contrast(1.02);transition:transform 1.1s cubic-bezier(.22,.68,.16,1)
+}
+.ficha:hover .retrato-ficha{transform:scale(1.05)}
+.ficha.com-foto::before{
+  background:linear-gradient(180deg, rgba(8,5,12,0) 38%, rgba(8,5,12,.82) 100%),
+             radial-gradient(ellipse 90% 50% at 50% 0%, rgba(181,126,220,.28), transparent 70%);
+}
+.ficha::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(circle at 50% 22%,rgba(181,126,220,.26),transparent 62%);
+  transition:transform .6s ease}
+.ficha:hover::before{transform:scale(1.15)}
+.ficha .apelido{font-family:var(--display);font-size:1.25rem}
+.ficha .tipo{font-size:.76rem;font-weight:500;letter-spacing:.12em;color:var(--lilas-claro);margin-top:4px}
+.ficha .vaga{position:absolute;top:var(--e3);left:var(--e3);font-size:.7rem;letter-spacing:.14em;color:var(--suave)}
+.ficha.livre{border-color:rgba(219,182,238,.5);border-style:dashed;display:grid;place-content:center;text-align:center;gap:4px}
+
+/* ===========================================================
+   DEPOIMENTOS
+   =========================================================== */
+.depoimentos-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:var(--e2)}
+.cartao{
+  display:flex;flex-direction:column;gap:var(--e3);
+  background:#fffdff;color:#150f1a;border-radius:var(--r-l);
+  padding:var(--e4) var(--e3);
+  box-shadow:0 18px 40px rgba(35,10,56,.2);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.cartao:hover{transform:translateY(-5px);box-shadow:0 26px 54px rgba(35,10,56,.32)}
+.cartao .aspa{font-family:var(--display);font-size:2.4rem;line-height:.5;color:var(--lilas-escuro);height:14px}
+.cartao blockquote{margin:0;font-family:var(--texto);font-weight:400;font-size:.98rem;line-height:1.6;flex:1;color:#241c2b}
+.autora{display:flex;align-items:center;gap:14px;padding-top:var(--e3);border-top:1px solid rgba(21,16,25,.12)}
+.autora .retrato{
+  width:50px;height:50px;border-radius:50%;flex:0 0 auto;overflow:hidden;
+  display:grid;place-items:center;font-family:var(--display);font-size:1rem;color:#fff;
+  background:linear-gradient(150deg,var(--lilas),var(--lilas-escuro));
+}
+.autora .retrato img{width:100%;height:100%;object-fit:cover;display:block}
+.autora .nome{font-family:var(--display);font-size:1.02rem;display:block}
+.autora .arroba{font-size:.82rem;color:#4d4556}
+
+/* ===========================================================
+   CANDIDATURA
+   =========================================================== */
+.casting-grade{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--e5);align-items:start}
+.casting-texto{display:grid;gap:var(--e3)}
+.casting-texto p{color:var(--suave)}
+.painel{
+  background:var(--superficie);border:1px solid var(--linha);border-radius:var(--r-l);
+  padding:var(--e5) var(--e4);
+}
+form{display:grid;gap:var(--e3)}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:var(--e3)}
+label{display:grid;gap:var(--e1);font-size:.76rem;font-weight:500;letter-spacing:.1em;color:var(--fg)}
+input,select,textarea{
+  font-family:var(--texto);font-size:.98rem;font-weight:400;color:var(--fg);
+  background:var(--superficie);border:1px solid var(--linha);border-radius:var(--r-s);
+  padding:13px 14px;transition:border-color .3s,background .3s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--acento);background:var(--superficie-alta);outline:none}
+input::placeholder,textarea::placeholder{color:var(--suave)}
+select option{background:#141018;color:#fff}
+textarea{resize:vertical;min-height:86px}
+.aviso{font-size:.8rem;color:var(--suave)}
+.ok{display:none;border:1px solid var(--acento);border-radius:var(--r-s);
+  padding:14px 18px;color:var(--acento);font-size:.92rem}
+.ok.visivel{display:block}
+
+/* ===========================================================
+   RODAPÉ
+   =========================================================== */
+footer{background:var(--preto);color:#fff;padding:var(--e6) 0 var(--e4)}
+.rodape-grade{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:var(--e5)}
+.rodape-grade h4{font-family:var(--display);font-weight:400;font-size:1rem;margin:0 0 var(--e2)}
+.rodape-grade ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--e1);color:#c3bdcd;font-size:.9rem}
+.rodape-grade a:hover{color:var(--lilas-claro)}
+.creditos{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--e2);
+  margin-top:var(--e6);padding-top:var(--e3);border-top:1px solid rgba(255,255,255,.12);
+  font-size:.78rem;color:#b0aaba}
+
+/* ===========================================================
+   BOTÃO FLUTUANTE DO WHATSAPP
+   =========================================================== */
+.zap{
+  position:fixed;right:clamp(16px,2.5vw,28px);bottom:clamp(16px,2.5vw,28px);z-index:70;
+  width:60px;height:60px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#25d366;color:#fff;
+  box-shadow:0 12px 30px rgba(37,211,102,.35), 0 2px 8px rgba(0,0,0,.4);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.zap:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 18px 38px rgba(37,211,102,.45)}
+.zap svg{width:32px;height:32px;fill:#fff}
+.zap .rotulo-zap{
+  position:absolute;right:72px;white-space:nowrap;
+  background:#0c0a10;color:#fff;border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;padding:9px 16px;font-size:.8rem;font-weight:500;letter-spacing:.02em;
+  opacity:0;transform:translateX(6px);pointer-events:none;transition:opacity .3s,transform .3s;
+}
+.zap:hover .rotulo-zap,.zap:focus-visible .rotulo-zap{opacity:1;transform:none}
+@media (max-width:620px){
+  .zap{width:54px;height:54px}
+  .zap svg{width:28px;height:28px}
+  .zap .rotulo-zap{display:none}
+}
+
+/* ===========================================================
+   ENTRADA DOS ELEMENTOS AO ROLAR
+   =========================================================== */
+.revelar{opacity:0;transform:translateY(20px);
+  transition:opacity 1s cubic-bezier(.22,.68,.16,1), transform 1s cubic-bezier(.22,.68,.16,1)}
+.revelar.visivel{opacity:1;transform:none}
+
+/* ===========================================================
+   RESPONSIVO
+   =========================================================== */
+@media (max-width:1080px){
+  .blocos.nossas{grid-template-columns:repeat(3,1fr)}
+  .passos,.numeros{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:980px){
+  .hero .wrap,.divisao,.cabeca,.manifesto-grade,.criterios-grade,.casting-grade{grid-template-columns:1fr}
+  .hero-base{grid-template-columns:1fr;gap:var(--e4)}
+  .hero h1{letter-spacing:.1em;max-width:none;line-height:1.5}
+  .divisao .coluna-titulo{position:static}
+  .elenco{grid-template-columns:repeat(2,1fr)}
+  .rodape-grade{grid-template-columns:1fr 1fr}
+  .menu{display:none}
+  .servico{grid-template-columns:1fr;gap:var(--e1);padding:var(--e3)}
+  .rolar{display:none}
+}
+@media (max-width:620px){
+  .blocos.suas,.blocos.nossas,.passos,.numeros,.elenco,.par,.rodape-grade{grid-template-columns:1fr}
+  .blocos.nossas{grid-template-columns:1fr 1fr}
+  .suas .bloco-item{min-height:0;gap:var(--e2)}
+  .painel,.selo{padding:var(--e4) var(--e3)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .abre,.revelar{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topo" id="topo">
+  <a href="#inicio" class="marca" aria-label="Vênus"><img src="img/logo-venus.png" alt="Vênus"></a>
+  <nav class="menu" aria-label="Navegação principal">
+    <a href="#divisao">Divisão</a>
+    <a href="#agencia">Agência</a>
+    <a href="#servicos">O que fazemos</a>
+    <a href="#metodo">Método</a>
+    <a href="#elenco">Elenco</a>
+    <a href="#duvidas">Dúvidas</a>
+  </nav>
+  <a class="btn" href="#casting">Entrar no casting</a>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero t-preto" id="inicio">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="aurora b" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1 class="abre">Sua carreira de criadora,<br>com um time inteiro<br>cuidando de tudo pra você.</h1>
+
+    <div class="hero-base">
+      <div>
+        <p class="abre d1">Imagem, produção, tráfego, atendimento e financeiro sob uma gestão só — para criadoras de conteúdo sensível. Elenco fechado, entrada por seleção.</p>
+        <div class="hero-acoes abre d2"><a class="btn btn-cheio btn-grande" href="#casting">Quero entrar no casting</a></div>
+      </div>
+      <div class="hero-meta abre d3">
+        <span>Temporada aberta · 2026</span>
+        <span>Goiânia · atuação nacional</span>
+      </div>
+    </div>
+  </div>
+  <span class="rolar" aria-hidden="true">role para ver a divisão do trabalho</span>
+</section>
+
+<!-- ===== DIVISÃO DO TRABALHO ===== -->
+<section class="bloco t-ameixa" id="divisao">
+  <div class="wrap divisao">
+    <div class="coluna-titulo">
+      <div class="placar">3<span class="barra">/</span>12</div>
+      <h2 style="font-size:clamp(1.45rem,2.2vw,2rem)">Você faz três coisas.<br>A agência faz as outras doze.</h2>
+      <p>É esta conta que separa uma criadora que fatura de uma criadora que trabalha o dia inteiro. Você grava — o resto, inclusive falar com cada assinante, é time nosso.</p>
+    </div>
+
+    <div>
+      <div class="grupo">
+        <div class="grupo-topo"><span class="quem">Você</span><span class="conta">três frentes</span></div>
+        <div class="blocos suas">
+          <article class="bloco-item"><span class="rot">01</span><span class="nome">Aparecer<span class="apoio">Presença, personalidade e o rosto que sustenta a marca.</span></span></article>
+          <article class="bloco-item"><span class="rot">02</span><span class="nome">Gravar para as redes<span class="apoio">Conteúdo de atração, com pauta e cronograma prontos.</span></span></article>
+          <article class="bloco-item"><span class="rot">03</span><span class="nome">Gravar o material de venda<span class="apoio">O conteúdo exclusivo. Daí em diante, quem vende é a agência.</span></span></article>
+        </div>
+      </div>
+
+      <div class="grupo">
+        <div class="grupo-topo"><span class="quem">Vênus</span><span class="conta">doze frentes</span></div>
+        <div class="blocos nossas">
+          <article class="bloco-item"><span class="rot">04</span><span class="nome">Nome e posicionamento</span></article>
+          <article class="bloco-item"><span class="rot">05</span><span class="nome">Direção de imagem</span></article>
+          <article class="bloco-item"><span class="rot">06</span><span class="nome">Roteiro e pauta</span></article>
+          <article class="bloco-item"><span class="rot">07</span><span class="nome">Edição e banco de conteúdo</span></article>
+          <article class="bloco-item"><span class="rot">08</span><span class="nome">Perfis de topo de funil</span></article>
+          <article class="bloco-item"><span class="rot">09</span><span class="nome">Tráfego pago</span></article>
+          <article class="bloco-item"><span class="rot">10</span><span class="nome">Atendimento e chat</span></article>
+          <article class="bloco-item"><span class="rot">11</span><span class="nome">Recorrência e recuperação</span></article>
+          <article class="bloco-item"><span class="rot">12</span><span class="nome">Recebimento internacional</span></article>
+          <article class="bloco-item"><span class="rot">13</span><span class="nome">Contabilidade e emissão</span></article>
+          <article class="bloco-item"><span class="rot">14</span><span class="nome">Contrato e jurídico</span></article>
+          <article class="bloco-item"><span class="rot">15</span><span class="nome">Remoção de conteúdo vazado</span></article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AGÊNCIA ===== -->
+<section class="bloco t-osso" id="agencia">
+  <div class="wrap manifesto-grade">
+    <h2 class="manifesto">Toda criadora sabe produzir.<br><span>Poucas sabem virar marca.</span></h2>
+    <div class="manifesto-texto">
+      <p>A Vênus existe para a segunda parte. Você entrega presença, personalidade e conteúdo. Nós entregamos tudo o que transforma isso em faturamento previsível.</p>
+      <p><strong>Não somos prestadora de serviço avulsa.</strong> Assumimos a carreira inteira e respondemos pelo resultado dela. Por isso o elenco é pequeno e a entrada é seletiva.</p>
+      <p>O nome vem da deusa: desejo tratado como poder, não como vergonha. É assim que posicionamos cada criadora que assina com a gente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVIÇOS ===== -->
+<section class="bloco t-preto" id="servicos">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2>O que a agência assume<br>quando você assina</h2>
+      <p class="medida">Cinco frentes, uma equipe. Relatório semanal e pessoas reais do outro lado — não um formulário de suporte.</p>
+    </div>
+    <div class="servicos corpo">
+      <article class="servico"><h3>Identidade</h3><p>Nome artístico, direção de imagem, bio, estética de feed e o personagem que sustenta o preço. Definimos quem você é antes de definir o que você vende.</p></article>
+      <article class="servico"><h3>Produção</h3><p>Roteiro, cronograma de gravação, direção remota ou presencial, edição e banco de conteúdo. Você grava com pauta pronta, não no improviso.</p></article>
+      <article class="servico"><h3>Distribuição</h3><p>Perfis de topo de funil, tráfego pago, parcerias e disparo coordenado nas plataformas certas — o mesmo conteúdo rendendo em vários lugares.</p></article>
+      <article class="servico"><h3>Vendas</h3><p>Quem conversa com o assinante é o nosso time de atendimento, não você. Chat treinado, ofertas, recorrência e recuperação — a frente onde a maioria das criadoras perde metade do faturamento tentando dar conta sozinha.</p></article>
+      <article class="servico"><h3>Retaguarda</h3><p>Contrato claro, recebimento internacional, emissão e organização fiscal, remoção de conteúdo vazado e proteção de imagem.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MÉTODO ===== -->
+<section class="bloco t-carvao" id="metodo">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2>Do primeiro contato<br>ao primeiro mês fechado</h2>
+      <p class="medida">Um caminho só, sem etapa pulada. Da candidatura ao lançamento leva em média três semanas.</p>
+    </div>
+    <div class="passos corpo">
+      <article class="passo"><span class="etapa">Etapa 01</span><h3>Candidatura</h3><p>Você envia seus dados e o que já tem hoje. Analisamos perfil, histórico e potencial de mercado.</p></article>
+      <article class="passo"><span class="etapa">Etapa 02</span><h3>Diagnóstico</h3><p>Conversa por vídeo com a equipe. Mostramos plano, projeção e condições. Sem taxa de entrada.</p></article>
+      <article class="passo"><span class="etapa">Etapa 03</span><h3>Construção</h3><p>Contrato assinado, identidade definida, plataformas abertas e o primeiro banco de conteúdo gravado.</p></article>
+      <article class="passo"><span class="etapa">Etapa 04</span><h3>Escala</h3><p>Tráfego ligado, rotina de publicação rodando e revisão de números toda semana com a gestão.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CRITÉRIOS ===== -->
+<section class="bloco t-osso" id="criterios">
+  <div class="wrap criterios-grade">
+    <div>
+      <h2 style="margin-bottom:var(--e5)">Não assinamos<br>com todo mundo</h2>
+      <div class="criterio"><h3>Rosto à mostra</h3><p>É a nossa única regra inegociável. Conteúdo sem rosto tem teto baixo de faturamento, e não trabalhamos para entregar teto baixo.</p></div>
+      <div class="criterio"><h3>Tempo real de dedicação</h3><p>Gravação e presença pedem agenda. Quem trata isso como bico não chega ao resultado que combinamos.</p></div>
+      <div class="criterio"><h3>Intenção de carreira</h3><p>Procuramos quem quer construir uma marca que dure anos, não quem quer um mês bom e sumir.</p></div>
+    </div>
+    <aside class="selo">
+      <p class="display">O elenco da Vênus é fechado por temporada.</p>
+      <p>Abrimos um número limitado de vagas por trimestre para manter o nível de atenção que cada criadora recebe. Quando fecha, a próxima janela é a seguinte.</p>
+      <a class="btn" href="#casting">Ver vagas do casting</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== NÚMEROS ===== -->
+<!-- Troque pelos números reais antes de publicar -->
+<section class="faixa-numeros t-grafite" id="numeros">
+  <div class="wrap">
+    <div class="numeros">
+      <div class="numero"><span class="valor">26+</span><span class="rotulo">Criadoras gerenciadas</span></div>
+      <div class="numero"><span class="valor">24h</span><span class="rotulo">Atendimento e chat</span></div>
+      <div class="numero"><span class="valor">9</span><span class="rotulo">Plataformas de distribuição</span></div>
+      <div class="numero"><span class="valor">100%</span><span class="rotulo">Recebimento formalizado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ELENCO ===== -->
+<section class="bloco t-preto" id="elenco">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2>Elenco</h2>
+      <p class="medida">Cada criadora tem um território próprio. Duas pessoas do mesmo nicho nunca disputam o mesmo público dentro da casa.</p>
+    </div>
+
+    <!-- Substitua pelos nomes e fotos reais -->
+    <div class="elenco corpo">
+<article class="ficha com-foto"><img class="retrato-ficha" src="img/elenco-eudaysinner.jpg" alt="eudaysinner" loading="lazy"><span class="vaga">01</span><span class="apelido">@eudaysinner</span><span class="tipo">Elenco Vênus</span></article>
+      <article class="ficha com-foto"><img class="retrato-ficha" src="img/elenco-eusouajapinhaof.jpg" alt="eusouajapinhaof" loading="lazy"><span class="vaga">02</span><span class="apelido">@eusouajapinhaof</span><span class="tipo">Elenco Vênus</span></article>
+      <article class="ficha com-foto"><img class="retrato-ficha" src="img/elenco-nubialimaof.jpg" alt="nubialimaof" loading="lazy"><span class="vaga">03</span><span class="apelido">@nubialimaof</span><span class="tipo">Elenco Vênus</span></article>
+      <article class="ficha com-foto"><img class="retrato-ficha" src="img/elenco-eurafatay.jpg" alt="eurafatay" loading="lazy"><span class="vaga">04</span><span class="apelido">@eurafatay</span><span class="tipo">Elenco Vênus</span></article>
+      <article class="ficha livre"><span class="apelido" style="color:var(--lilas-claro)">Vaga aberta</span><span class="tipo">Pode ser a sua</span></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEPOIMENTOS ===== -->
+<!-- Para a foto real: troque o conteúdo de .retrato por <img src="foto.jpg" alt="Nome"> -->
+<section class="bloco t-violeta" id="depoimentos">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2>Quem já está<br>no elenco</h2>
+      <p class="medida">Depoimentos de criadoras gerenciadas pela Vênus. Todas autorizaram o uso do nome e da imagem.</p>
+    </div>
+
+    <div class="depoimentos-grade corpo">
+<article class="cartao">
+        <span class="aspa" aria-hidden="true">“</span>
+        <blockquote>Eu já faturava antes. A diferença é que hoje eu sei exatamente de onde vem cada real e o que fazer na semana seguinte. Antes era só sorte e muita gravação.</blockquote>
+        <div class="autora"><span class="retrato"><img src="img/avatar-eudaysinner.jpg" alt="Day Sinner"></span>
+          <span><span class="nome">Day Sinner</span><span class="arroba">@eudaysinner</span></span></div>
+      </article>
+      <article class="cartao">
+        <span class="aspa" aria-hidden="true">“</span>
+        <blockquote>Eu não respondo mais nenhuma mensagem. O time atende por mim, com o meu jeito de falar, e eu só vejo o resultado. Em oito semanas a renovação dobrou.</blockquote>
+        <div class="autora"><span class="retrato"><img src="img/avatar-eusouajapinhaof.jpg" alt="Japinha"></span>
+          <span><span class="nome">Japinha</span><span class="arroba">@eusouajapinhaof</span></span></div>
+      </article>
+      <article class="cartao">
+        <span class="aspa" aria-hidden="true">“</span>
+        <blockquote>Entrei sem saber nem que nome usar. Eles construíram o personagem comigo, do jeito de falar até o preço. Hoje eu não gravo mais nada sem pauta.</blockquote>
+        <div class="autora"><span class="retrato"><img src="img/avatar-nubialimaof.jpg" alt="Núbia Lima"></span>
+          <span><span class="nome">Núbia Lima</span><span class="arroba">@nubialimaof</span></span></div>
+      </article>
+      <article class="cartao">
+        <span class="aspa" aria-hidden="true">“</span>
+        <blockquote>O que me segurava era a parte chata: recebimento de fora, nota, imposto. Eu evitava pensar nisso. Agora chega tudo organizado e eu só cuido do conteúdo.</blockquote>
+        <div class="autora"><span class="retrato"><img src="img/avatar-eurafatay.jpg" alt="Rafa"></span>
+          <span><span class="nome">Rafa</span><span class="arroba">@eurafatay</span></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PERGUNTAS FREQUENTES ===== -->
+<section class="bloco t-preto" id="duvidas">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2>Perguntas frequentes</h2>
+      <p class="medida">O que as criadoras mais perguntam antes de assinar. Se a sua dúvida não estiver aqui, pergunte na candidatura.</p>
+    </div>
+
+    <div class="faq corpo">
+      <details open>
+        <summary>Quanto custa entrar na agência?</summary>
+        <p class="resposta">Nada na entrada. A Vênus trabalha por percentual sobre o que você fatura, definido em contrato antes de qualquer gravação. Se você não ganha, a agência não ganha — é o que nos obriga a fazer dar certo.</p>
+      </details>
+      <details>
+        <summary>Preciso já ter público ou faturamento?</summary>
+        <p class="resposta">Não. Metade do elenco começou do zero. O que avaliamos é presença, disposição para gravar com regularidade e potencial de posicionamento, não o número de seguidores que você tem hoje.</p>
+      </details>
+      <details>
+        <summary>Eu vou precisar conversar com os assinantes?</summary>
+        <p class="resposta">Não. O atendimento é feito pelo nosso time, que aprende o seu jeito de falar e responde por você, inclusive nas vendas. Você grava o conteúdo para as redes e o material exclusivo — o resto é com a gente.</p>
+      </details>
+      <details>
+        <summary>Minha família ou meu trabalho vão descobrir?</summary>
+        <p class="resposta">A construção do personagem é feita pensando nisso: nome artístico, região de divulgação, cenários e limites de exposição são definidos com você antes do lançamento. Também monitoramos e removemos conteúdo vazado.</p>
+      </details>
+      <details>
+        <summary>Preciso mostrar o rosto mesmo?</summary>
+        <p class="resposta">Sim, é a nossa única regra inegociável. Perfil sem rosto converte menos e tem teto baixo de faturamento. Se você ainda não se sente pronta, converse com a gente sobre a transição — mas a gestão só começa quando esse ponto estiver resolvido.</p>
+      </details>
+      <details>
+        <summary>Onde vocês ficam? Preciso morar aí?</summary>
+        <p class="resposta">A base é em Goiânia e a gestão é nacional, feita à distância. Gravações presenciais com equipe e estúdio são combinadas por temporada, sem obrigação de mudança.</p>
+      </details>
+      <details>
+        <summary>E se eu quiser sair?</summary>
+        <p class="resposta">O contrato tem prazo e regra de saída definidos, sem multa surpresa. As contas e os perfis ficam com você — a agência opera, não confisca o que é seu.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CANDIDATURA ===== -->
+<section class="bloco t-magenta" id="casting">
+  <div class="wrap casting-grade">
+    <div class="casting-texto">
+      <h2>Candidatura<br>ao casting</h2>
+      <p class="medida">Leva dois minutos. Se o seu perfil fizer sentido para a temporada atual, a equipe chama você no WhatsApp em até 48 horas com o diagnóstico.</p>
+      <p class="medida">Suas informações ficam com a gestão da agência e não são compartilhadas com terceiros.</p>
+    </div>
+    <div class="painel">
+      <form id="form-casting" novalidate>
+        <div class="par">
+          <label>Nome <input type="text" name="nome" autocomplete="name" required></label>
+          <label>WhatsApp <input type="tel" name="whatsapp" autocomplete="tel" required></label>
+        </div>
+        <div class="par">
+          <label>E-mail <input type="email" name="email" autocomplete="email" required></label>
+          <label>Instagram <input type="text" name="instagram" placeholder="@"></label>
+        </div>
+        <div class="par">
+          <label>Já produz conteúdo?
+            <select name="experiencia"><option>Ainda não comecei</option><option>Menos de 6 meses</option><option>Mais de 6 meses</option><option>Mais de 2 anos</option></select>
+          </label>
+          <label>Mostra o rosto?
+            <select name="rosto"><option>Sim</option><option>Ainda não, mas pretendo</option><option>Não</option></select>
+          </label>
+        </div>
+        <label>O que você quer que a Vênus resolva <textarea name="objetivo" rows="3"></textarea></label>
+        <button class="btn btn-cheio btn-grande" type="submit" style="justify-self:start">Enviar minha candidatura</button>
+        <p class="aviso">Ao enviar, você confirma ter 18 anos ou mais.</p>
+        <p class="ok" id="ok" role="status">Abrimos o WhatsApp com a sua candidatura pronta — é só tocar em enviar para a gestão receber.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="rodape-grade">
+      <div>
+        <span class="marca"><img src="img/logo-venus.png" alt="Vênus"></span>
+        <p style="color:#c3bdcd;margin-top:var(--e3);max-width:32ch">Agência de gestão de carreira para criadoras de conteúdo sensível.</p>
+      </div>
+      <div>
+        <h4>Navegar</h4>
+        <ul>
+          <li><a href="#divisao">Divisão do trabalho</a></li>
+          <li><a href="#agencia">Agência</a></li>
+          <li><a href="#servicos">O que fazemos</a></li>
+          <li><a href="#metodo">Método</a></li>
+          <li><a href="#elenco">Elenco</a></li>
+          <li><a href="#duvidas">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/5562996319024?text=Oi%2C%20tenho%20interesse%20em%20ser%20agenciada%20por%20voc%C3%AAs%2C%20gostaria%20de%20saber%20como%20funciona" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="creditos">
+      <span>© 2026 Vênus. Todos os direitos reservados.</span>
+      <span>Conteúdo destinado a maiores de 18 anos.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTÃO DO WHATSAPP -->
+<a class="zap" href="https://wa.me/5562996319024?text=Oi%2C%20tenho%20interesse%20em%20ser%20agenciada%20por%20voc%C3%AAs%2C%20gostaria%20de%20saber%20como%20funciona" target="_blank" rel="noopener" aria-label="Falar com a gestão no WhatsApp">
+  <span class="rotulo-zap">Falar com a gestão</span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.71 2-1.4.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.37 9.37 0 0 1-1.44-5.01c0-5.18 4.23-9.4 9.42-9.4a9.36 9.36 0 0 1 6.65 2.76 9.32 9.32 0 0 1 2.76 6.65c0 5.18-4.23 9.4-9.42 9.4M20.42 3.66A11.7 11.7 0 0 0 12.05 .2C5.57.2.3 5.46.3 11.93c0 2.07.54 4.09 1.57 5.87L.2 23.8l6.14-1.61a11.75 11.75 0 0 0 5.71 1.45h.01c6.48 0 11.75-5.26 11.75-11.73 0-3.13-1.22-6.08-3.44-8.29"/></svg>
+</a>
+
+<script>
+  const alvos = document.querySelectorAll(
+    '.coluna-titulo > *, .grupo, .cabeca > *, .manifesto, .manifesto-texto > p, ' +
+    '.servico, .passo, .criterio, .criterios-grade > div > h2, .selo, ' +
+    '.numero, .ficha, .cartao, .faq details, .casting-texto > *, .painel, .rodape-grade > div'
+  );
+  alvos.forEach(el => el.classList.add('revelar'));
+
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      const el = entrada.target;
+      const irmaos = Array.from(el.parentElement.children).filter(n => n.classList.contains('revelar'));
+      const ordem = Math.min(irmaos.indexOf(el), 6);
+      el.style.transitionDelay = (ordem * 90) + 'ms';
+      el.classList.add('visivel');
+      observador.unobserve(el);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  alvos.forEach(el => observador.observe(el));
+
+  const topo = document.getElementById('topo');
+  const aoRolar = () => topo.classList.toggle('fixa', window.scrollY > 40);
+  aoRolar();
+  window.addEventListener('scroll', aoRolar, {passive:true});
+
+  const NUMERO_AGENCIA = '5562996319024'; // WhatsApp que recebe as candidaturas
+
+  document.getElementById('form-casting').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const v = (campo) => (f[campo].value || '').trim();
+
+    if (!v('nome') || !v('whatsapp') || !v('email')) {
+      alert('Preencha nome, WhatsApp e e-mail para enviar.');
+      return;
+    }
+
+    let instagram = v('instagram');
+    if (instagram && instagram[0] !== '@') instagram = '@' + instagram;
+
+    const linhas = [
+      'Candidatura ao casting da Vênus',
+      '',
+      'Nome: ' + v('nome'),
+      'WhatsApp: ' + v('whatsapp'),
+      'E-mail: ' + v('email'),
+      'Instagram: ' + (instagram || 'não informado'),
+      'Já produz conteúdo: ' + v('experiencia'),
+      'Mostra o rosto: ' + v('rosto'),
+      'O que quer resolver: ' + (v('objetivo') || 'não informado'),
+      '',
+      'Enviado pelo site'
+    ];
+
+    const url = 'https://wa.me/' + NUMERO_AGENCIA + '?text=' + encodeURIComponent(linhas.join('\n'));
+    window.open(url, '_blank', 'noopener');
+
+    document.getElementById('ok').classList.add('visivel');
+    f.reset();
+  });
+</script>
+</body>
+</html>
